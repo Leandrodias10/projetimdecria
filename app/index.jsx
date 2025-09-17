@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import ( useState ) from "react";
 
 export default function Index() {
+  const valorInicialText = "23:00";
+  const [timeLeft, setTimeLeft] = useState(valorInicialText);
+
+  function atualiza(){
+    setTimeLeft("20:00");
+  }
   return (
     <View style={styles.container}>
 
@@ -13,8 +20,8 @@ export default function Index() {
       </View>
 
       <View style={styles.actions}>
-        <Text style={styles.timer}>20:00</Text>
-        <Pressable style={styles.buttonStart}>
+        <Text style={styles.timer}>{valorInicialText}</Text>
+        <Pressable style={styles.buttonStart} onPress = {atualiza}>
           <Text style={styles.textButton}>Começar</Text>
         </Pressable>
       </View>
@@ -41,6 +48,7 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
     resizeMode: 'contain',
+    borderRadius: 100,
   },
 
   actions: {
