@@ -3,12 +3,35 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import ( useState ) from "react";
 
 export default function Index() {
-  const valorInicialText = "23:00";
-  const [timeLeft, setTimeLeft] = useState(valorInicialText);
+  const valorInicial = "";
+  const [timeLeft, setTimeLeft] = useState(valorInicial);
+  const [isRunning, setIsRunning] = useState(false);
+  const [timeLabel, setTimeLabel] = useState("Start");
 
   function atualiza(){
-    setTimeLeft("20:00");
+    setTimeLeft(valor => valor -1);
   }
+
+  useEffect(() =>{
+    let interval = null;
+    if(isRunning){
+      interval = setInterval(atualiza, 1000);
+    }else{
+      setIsRunning(false);
+      setTimeLabel("Start");
+    }
+    return () =>clearInterval(interval);
+  },[isRunning, timeLeft]);
+
+    function startTimer(){
+      if (!isRunnning){
+        setIsRunning(true);
+        setTimeLabel("Stop")
+      }else{
+        setIsRunning(false);
+        setTimeLabel("Start");
+      }
+    }
   return (
     <View style={styles.container}>
 
@@ -20,9 +43,9 @@ export default function Index() {
       </View>
 
       <View style={styles.actions}>
-        <Text style={styles.timer}>{valorInicialText}</Text>
-        <Pressable style={styles.buttonStart} onPress = {atualiza}>
-          <Text style={styles.textButton}>Começar</Text>
+        <Text style={styles.timer}>{timeLeft}</Text>
+        <Pressable style={!isRunning?style.buttonStart:style.buttonStop} onPress = {startTimer}>
+          <Text style={styles.textButton}>(timelabel)</Text>
         </Pressable>
       </View>
 
