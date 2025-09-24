@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import ( useState ) from "react";
 
 export default function Index() {
   const valorInicial = "";
