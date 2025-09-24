@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function Index() {
@@ -23,7 +23,7 @@ export default function Index() {
   },[isRunning, timeLeft]);
 
     function startTimer(){
-      if (!isRunnning){
+      if (!isRunning){
         setIsRunning(true);
         setTimeLabel("Stop")
       }else{
@@ -43,8 +43,8 @@ export default function Index() {
 
       <View style={styles.actions}>
         <Text style={styles.timer}>{timeLeft}</Text>
-        <Pressable style={!isRunning?style.buttonStart:style.buttonStop} onPress = {startTimer}>
-          <Text style={styles.textButton}>(timelabel)</Text>
+        <Pressable style={!isRunning?styles.buttonStart:styles.buttonStop} onPress = {startTimer}>
+          <Text style={styles.textButton}>{timeLabel}</Text>
         </Pressable>
       </View>
 
